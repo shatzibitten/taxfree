@@ -232,17 +232,17 @@
 
                 <!-- Здесь вид обнала вычета (ежемесячно (month), кредит (now), депозит (dep))-->
                 <div class="col-md-12 col-xs-12" style="text-align: left; margin-bottom: 5%; margin-left: 20px">
-                    <button style="width: 250px" class="btn btn-primary " data-formname="cash-form" data-cashtype="month" name="cash-month-btn" type="button">
+                    <button data-toggle="modal" data-target="#myModal" style="width: 250px" class="btn btn-primary " data-formname="cash-form" data-cashtype="month" name="cash-month-btn" type="button">
                         Получать деньги ежемесячно
                     </button>
                 </div>
                 <div class="col-md-12 col-xs-12" style="text-align: left; margin-bottom: 5%; margin-left: 20px;">
-                    <button style="width: 250px" class="btn btn-primary " data-formname="cash-form" data-cashtype="now" name="cash-now-btn" type="button">
+                    <button data-toggle="modal" data-target="#myModal" style="width: 250px" class="btn btn-primary " data-formname="cash-form" data-cashtype="now" name="cash-now-btn" type="button">
                         Получить деньги сразу
                     </button>
                 </div>
                 <div class="col-md-12 col-xs-12" style="text-align: left; margin-bottom: 5%; margin-left: 20px; ">
-                    <button style="width: 250px" class="btn btn-primary " data-formname="cash-form" data-cashtype="dep" name="cash-dep-btn" type="button">
+                    <button data-toggle="modal" data-target="#myModal" style="width: 250px" class="btn btn-primary " data-formname="cash-form" data-cashtype="dep" name="cash-dep-btn" type="button">
                         Положить деньги на депозит (15%)
                     </button>
                 </div>
@@ -275,5 +275,27 @@
                 lang: 'ru'
             });
         </script>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        Большое спасибо.
+                        Мы обрабатываем вашу заявку.
+                        В скором времени свяжемся с вами и сообщим дальнейшие действия.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>
