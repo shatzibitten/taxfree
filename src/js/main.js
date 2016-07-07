@@ -182,104 +182,105 @@ $(function() {
         console.log("form buttonOnClick -----");
         console.log(jsonObject);
         console.log("-------------------");
-        
-        $.ajax({
-                method: "POST",
-                url:    URLS.SAVE_DATA,
-                data:   jsonObject
-        }).done(function() {
 
-                //перенести в .done()
-                $("#cash").show();
-                //сохраняем вид вычета
-                $("#cash").data("taxType",formName);
-                var sal          = $("#"+formName+"-sal").val();
-                var taxDeduction = $("#"+formName+"-sum").val();
 
-                if (formName == "estate-form") {
-                    console.log("___________");
-                    var yearsReg = /\d+\s*(лет|год)/;
-                    var term = $("#estate-form-years").val();
-                    var monthsReg = /\d+\s*(мес|месяц)/;
-                    var txt;
+        var sal          = $("#"+formName+"-sal").val();
+        var taxDeduction = $("#"+formName+"-sum").val();
 
-                    //Нормализация полей
-                    txt = term;
-                    term.replace( /,\d{0,}|\.\d{0,}/g, "" );
-                    if ( yearsReg.test( term ) )  {
-                        term = parseInt( term.match( yearsReg )[0] ) * 12;
-                        if ( monthsReg.test( txt ) ) {
-                            txt = parseInt( txt.match( monthsReg )[0] )
-                        } else {
-                            txt = "0";
-                        }
-                        term = +term + parseInt(txt);
-                    }
+        if (formName == "estate-form") {
+            console.log("___________");
+            var yearsReg = /\d+\s*(лет|год)/;
+            var term = $("#estate-form-years").val();
+            var monthsReg = /\d+\s*(мес|месяц)/;
+            var txt;
 
-                    console.log(calculateCredit.differ($("#estate-form-sum").val(), term, $("#estate-form-percent").val() ));
-
-                    var sumPmnts = 0;
-                    var elmt = calculateCredit.differ($("#estate-form-sum").val(), term, $("#estate-form-percent").val() ).payments;
-                    for( var i = 0; i < elmt.length; i++ ){
-                        sumPmnts += parseInt( elmt[i], 10 ); //don't forget to add the base
-                    }
-                    var avg = sumPmnts/elmt.length;
-                    console.log("AVG - " + avg);
-                    taxDeduction = avg;
-                }
-
-                var taxBase = sal-(sal*10/100)-22859;
-                var ipnRaw     = (taxBase*10/100);
-
-                var withTaxDeduction = sal-(sal*10/100)-taxDeduction-22859;
-                var ipnWithDeduction = withTaxDeduction*10/100;
-                if (ipnWithDeduction < 0) {
-                    var monthRevenue    = ipnRaw;
+            //Нормализация полей
+            txt = term;
+            term.replace( /,\d{0,}|\.\d{0,}/g, "" );
+            if ( yearsReg.test( term ) )  {
+                term = parseInt( term.match( yearsReg )[0] ) * 12;
+                if ( monthsReg.test( txt ) ) {
+                    txt = parseInt( txt.match( monthsReg )[0] )
                 } else {
-                    var monthRevenue    = ipnRaw-ipnWithDeduction;
+                    txt = "0";
                 }
+                term = +term + parseInt(txt);
+            }
 
-                var yearRevenue     = monthRevenue*12;
-                var res             = 0;
-                console.log("raw ipn - ", ipnRaw);
-                console.log("ipn with deduction", ipnWithDeduction);
+            console.log(calculateCredit.differ($("#estate-form-sum").val(), term, $("#estate-form-percent").val() ));
 
-                if (formName === "estate-form") {
-                    var termYear = $("#estate-form-date").val().split("/")[2];
-                    var currYear = new Date().getFullYear();
-                    var yearDiff = currYear-termYear;
+            var sumPmnts = 0;
+            var elmt = calculateCredit.differ($("#estate-form-sum").val(), term, $("#estate-form-percent").val() ).payments;
+            for( var i = 0; i < elmt.length; i++ ){
+                sumPmnts += parseInt( elmt[i], 10 ); //don't forget to add the base
+            }
+            var avg = sumPmnts/elmt.length;
+            console.log("AVG - " + avg);
+            taxDeduction = avg;
+        }
 
-                    if (yearDiff>5) {
-                        yearDiff = 5;
-                    }
+        var taxBase = sal-(sal*10/100)-22859;
+        var ipnRaw     = (taxBase*10/100);
 
-                    if (yearDiff<1) {
-                        yearDiff = 1;
-                    }
-                    console.log("GOD " + yearDiff);
-                    yearRevenue = yearDiff*yearRevenue;
+        var withTaxDeduction = sal-(sal*10/100)-taxDeduction-22859;
+        var ipnWithDeduction = withTaxDeduction*10/100;
+        if (ipnWithDeduction < 0) {
+            var monthRevenue    = ipnRaw;
+        } else {
+            var monthRevenue    = ipnRaw-ipnWithDeduction;
+        }
 
-                }
+        var yearRevenue     = monthRevenue*12;
+        var res             = 0;
+        console.log("raw ipn - ", ipnRaw);
+        console.log("ipn with deduction", ipnWithDeduction);
+
+        if (formName === "estate-form") {
+            var termYear = $("#estate-form-date").val().split("/")[2];
+            var currYear = new Date().getFullYear();
+            var yearDiff = currYear-termYear;
+
+            if (yearDiff>5) {
+                yearDiff = 5;
+            }
+
+            if (yearDiff<1) {
+                yearDiff = 1;
+            }
+            console.log("GOD " + yearDiff);
+            yearRevenue = yearDiff*yearRevenue;
+        }
 
 
-
-                res = yearRevenue > 1000000 ? 1000000 : yearRevenue;
-                if (res < 0) {
-                    res = "К сожалению мы не сможем вам помочь. Указан слишком маленький размер оклада";
-                    $("button").prop("disabled", true);
-                } else {
-                    res += " тенге";
-                }
-                $("#sum").html(res);
-                $("#cash-form-sum").val(res);            
-        })
-        .fail(function(er) {
-                console.log(er);
-                $("#sum").html("Заполните форму или обратитесь к администратору!");
-                //$("#cash-form-sum").val(res);
-        })
-        .always(function() {
-        });
+        res = yearRevenue > 1000000 ? 1000000 : yearRevenue;
+        if (res < 0) {
+            res = "К сожалению мы не сможем вам помочь. Указан слишком маленький размер оклада";
+            $("button").prop("disabled", true);
+            $("#cash").show();
+            $("#sum").html(res);
+        } else {
+            res += " тенге";
+            
+            $.ajax({
+                    method: "POST",
+                    url:    URLS.SAVE_DATA,
+                    data:   jsonObject
+            }).done(function() {
+                    //перенести в .done()
+                    $("#cash").show();
+                    //сохраняем вид вычета
+                    $("#cash").data("taxType",formName);
+                    $("#sum").html(res);
+                    $("#cash-form-sum").val(res);
+            })
+            .fail(function(er) {
+                    console.log(er);
+                    $("#sum").html("Заполните форму или обратитесь к администратору!");
+                    //$("#cash-form-sum").val(res);
+            })
+            .always(function() {
+            });
+        }
     });
 });
 
