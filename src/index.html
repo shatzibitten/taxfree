@@ -1,0 +1,279 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+
+        <![endif]-->
+        <div class="container">
+            <a href="http://freetax.kz/">Перейти на сайт</a>
+
+        <h3 style="text-align: left;">Калькулятор налоговых вычетов</h3>
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#estate" data-toggle="tab">Жилищные займы</a></li>
+            <li role="presentation"><a href="#edu" data-toggle="tab">Образование (дет.сад, школа, ВУЗ)</a></li>
+            <li role="presentation"><a href="#med" data-toggle="tab">Здоровье</a></li>
+        </ul>
+
+        <div class="container">
+        <!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+            <div class="tab-content col-md-6 col-sm-6 col-xs-12">
+                <br>
+                <div id="estate" class="tab-pane active">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <form method="post" id="estate-form">
+                                        <div class="form-group ">
+                                            <label class="control-label requiredField" for="estate-form-sal">
+                                                Ежемесячный доход (сумма до вычета всех налогов - ипн, пенсионные отчисления и т.д.)
+                   <span class="asteriskField">
+                    *
+                   </span>
+                                            </label>
+                                            <input data-validation="number required" data-validation-allowing="range[22000;1500000000]" class="form-control" id="estate-form-sal" name="estate-form-sal" type="text"/>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label class="control-label requiredField" for="estate-form-sum">
+                                                Сумма займа
+                   <span class="asteriskField">
+                    *
+                   </span>
+                                            </label>
+                                            <input data-validation="number required" class="form-control" id="estate-form-sum" name="estate-form-sum" type="text"/>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="control-label " for="estate-form-bank">
+                                                Банк
+                                            </label>
+                                            <select class="select form-control" id="estate-form-bank" name="estate-form-bank">
+                                                <option value="Банк Центр Кредит">
+                                                    Банк Центр Кредит
+                                                </option>
+                                                <option value="Казком/БТА">
+                                                    Казком/БТА
+                                                </option>
+                                                <option value="Народный Банк">
+                                                    Народный Банк
+                                                </option>
+                                                <option value="Kaspi Bank">
+                                                    Kaspi Bank
+                                                </option>
+                                                <option value="Сбербанк">
+                                                    Сбербанк
+                                                </option>
+                                                <option value="Жилстройсбербанк">
+                                                    Жилстройсбербанк
+                                                </option>
+                                            </select>
+                  <span class="help-block" id="hint_bank">
+                   Банк, в котором был оформлен займ
+                  </span>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="control-label requiredField" for="estate-form-years">
+                                                Срок займа
+                   <span class="asteriskField">
+                    *
+                   </span>
+                                            </label>
+                                            <input class="form-control" id="estate-form-years" name="estate-form-years" placeholder="1 год 2 месяца" type="text"/>
+                  <span class="help-block" id="hint_years">
+                      В месяцах (можно ввести так: "2 года 5 мес.", или "5 лет")
+                  </span>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="control-label requiredField" for="estate-form-percent">
+                                                Процентная ставка
+                   <span class="asteriskField">
+                    *
+                   </span>
+                                            </label>
+                                            <input data-validation="number required" data-validation-allowing="range[0;100]" class="form-control" id="estate-form-percent" name="estate-form-percent" type="text"/>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label class="control-label requiredField" for="estate-form-date">
+                                                Дата выдачи займа
+                   <span class="asteriskField">
+                    *
+                   </span>
+                                            </label>
+                                            <input data-validation="date required" data-validation-format="dd/mm/yyyy" class="form-control" id="estate-form-date" name="estate-form-date" placeholder="MM/DD/YYYY" type="text"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <div>
+                                                <button class="btn btn-primary " data-formname="estate-form" name="button" type="submit">
+                                                    Расчитать
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                <div id="edu" class="tab-pane">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <form id="edu-form" method="post">
+
+                                        <div class="form-group ">
+                                            <label class="control-label requiredField" for="edu-form-sal">
+                                                Ежемесячный доход (сумма до вычета всех налогов - ипн, пенсионные отчисления и т.д.)
+                   <span class="asteriskField">
+                    *
+                   </span>
+                                            </label>
+                                            <input data-validation="number required" data-validation-allowing="range[22000;1500000000]" class="form-control" id="edu-form-sal" name="edu-form-sal" type="text"/>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label class="control-label requiredField" for="edu-form-sum">
+                                                Расходы на образование в месяц
+                   <span class="asteriskField">
+                    *
+                   </span>
+                                            </label>
+                                            <input class="form-control" id="edu-form-sum" name="edu-form-sum" type="text"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div>
+                                                <button class="btn btn-primary " data-formname="edu-form" name="submit" type="button">
+                                                    ВЕРНУТЬ ДЕНЬГИ
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div id="med" class="tab-pane">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <form id="med-form" method="post">
+                                        <div class="form-group ">
+                                            <div class="form-group ">
+                                                <label class="control-label requiredField" for="med-form-sal">
+                                                    Ежемесячный доход (сумма до вычета всех налогов - ипн, пенсионные отчисления и т.д.)
+                   <span class="asteriskField">
+                    *
+                   </span>
+                                                </label>
+                                                <input data-validation="number required" data-validation-allowing="range[22000;1500000000]" class="form-control" id="med-form-sal" name="med-form-sal" type="text"/>
+                                            </div>
+
+                                            <label class="control-label requiredField" for="med-form-sum">
+                                                Месячные расходы на медицинские услуги
+                   <span class="asteriskField">
+                    *
+                   </span>
+                                            </label>
+                                            <input class="form-control" id="med-form-sum" name="med-form-sum" type="text"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div>
+                                                <button class="btn btn-primary " data-formname="med-form" name="submit" type="button">
+                                                        Расчитать
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+            <form id="cash" style="display: none">
+
+
+                <div class="cash-calendar">
+
+
+                    <div style="margin-top: 25%; margin-left: 35px; text-align: left; font-size: 30px ">
+                        Приблизительная сумма возврата:
+                        <div id="sum" style="font-size: 40px;"></div>
+
+                    </div>
+                </div>
+
+                <!-- Тут будет сумма вычета -->
+                <input type="hidden" id="cash-form-sum" name="cash-form-sum" value="0" />
+
+                <!-- Здесь вид обнала вычета (ежемесячно (month), кредит (now), депозит (dep))-->
+                <div class="col-md-12 col-xs-12" style="text-align: left; margin-bottom: 5%; margin-left: 20px">
+                    <button style="width: 250px" class="btn btn-primary " data-formname="cash-form" data-cashtype="month" name="cash-month-btn" type="submit">
+                        Получать деньги ежемесячно
+                    </button>
+                </div>
+                <div class="col-md-12 col-xs-12" style="text-align: left; margin-bottom: 5%; margin-left: 20px;">
+                    <button style="width: 250px" class="btn btn-primary " data-formname="cash-form" data-cashtype="now" name="cash-now-btn" type="submit">
+                        Получить деньги сразу
+                    </button>
+                </div>
+                <div class="col-md-12 col-xs-12" style="text-align: left; margin-bottom: 5%; margin-left: 20px; ">
+                    <button style="width: 250px" class="btn btn-primary " data-formname="cash-form" data-cashtype="dep" name="cash-dep-btn" type="submit">
+                        Положить деньги на депозит (15%)
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        </div>
+</div>
+
+        <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
+        <script src="js/vendor/jquery.mask.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.23/jquery.form-validator.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+
+            $.validate({
+                lang: 'ru'
+            });
+        </script>
+    </body>
+</html>
